@@ -21,7 +21,7 @@ window.JSMaps.maps.estonia = {
 	  },
 	  {
 	    "enable": true,
-	    "name": "Tartu",
+	    "name": "Tartu maakond",
 	    "abbreviation": "TA",
 	    "textX": 0,
 	    "textY": 0,
@@ -29,7 +29,7 @@ window.JSMaps.maps.estonia = {
 	    "hoverColor": "#E32F02",
 	    "selectedColor": "#feb41c",
 	    "url": "http://jsmaps.io/",
-	    "text": "<h1>Tartu</h1><br /><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>",
+	    "text": "<h1>Tartu maakond</h1><br /><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>",
 	    "path": "M630.8,275.1 L627.3,275.4 L623.9,273.5 L625.5,270.7 L628.9,272.3 Z M587.8,210.0 L590.0,214.2 L594.0,225.5 L597.6,244.2 L597.7,260.1 L598.5,264.6 L601.1,267.9 L608.5,268.8 L616.2,273.0 L618.6,275.8 L617.1,279.3 L617.1,283.8 L618.7,290.0 L617.9,292.4 L624.0,300.9 L624.5,309.6 L625.9,313.3 L609.2,308.0 L605.3,308.7 L601.9,306.9 L601.4,303.1 L599.4,300.9 L589.5,301.1 L585.7,298.6 L584.0,300.8 L580.3,301.1 L577.2,298.9 L574.7,299.5 L571.9,305.0 L569.7,305.2 L566.8,302.3 L561.7,303.2 L559.6,302.5 L557.1,304.0 L554.5,311.1 L551.4,314.3 L544.4,316.6 L541.1,316.5 L539.6,314.0 L537.4,314.7 L535.0,317.7 L531.7,317.2 L532.0,323.7 L530.3,326.5 L527.1,327.9 L525.2,324.3 L518.7,318.6 L507.5,322.3 L503.0,316.8 L500.3,317.8 L495.8,323.1 L487.3,328.2 L468.7,326.5 L466.0,306.2 L465.5,290.1 L472.3,277.2 L479.9,266.5 L479.9,264.9 L476.3,251.3 L480.3,249.9 L483.6,250.1 L487.8,248.6 L497.6,241.6 L501.3,241.1 L502.9,243.8 L505.0,243.9 L507.4,241.1 L510.2,240.6 L512.2,242.4 L518.0,239.8 L526.0,243.5 L530.0,243.9 L532.2,241.5 L535.3,235.4 L541.5,238.0 L551.5,235.6 L554.8,229.3 L557.1,220.5 L560.3,221.3 L565.5,225.4 L573.8,227.0 L573.8,217.6 L577.8,215.4 L582.3,211.5 Z"
 	  },
 	  {
@@ -204,9 +204,19 @@ window.JSMaps.maps.estonia = {
 	],
 	"pins": [
 		{
-			"name": "Sample pin",
-			"xPos": 359,
-			"yPos": 244,
+			"name": "Tallinn",
+			"xPos": 320,
+			"yPos": 45,
+			"color": "#ffc90e",
+			"hoverColor": "#E32F02",
+			"selectedColor": "#feb41c",
+			"url": "http://jsmaps.io",
+			"text": "<h1>Sample pin</h1><br /><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>"
+		},
+		{
+			"name": "Tartu",
+			"xPos": 540,
+			"yPos": 275,
 			"color": "#ffc90e",
 			"hoverColor": "#E32F02",
 			"selectedColor": "#feb41c",
