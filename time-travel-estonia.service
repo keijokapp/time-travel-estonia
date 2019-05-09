@@ -1,0 +1,17 @@
+[Unit]
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+Environment="NODE_ENV=production"
+StateDirectory=time-travel-estonia
+WorkingDirectory=~
+Type=notify
+ExecStart=/usr/bin/env time-travel-estonia /etc/time-travel-estonia/config.json
+User=time-travel-estonia
+Group=time-travel-estonia
+UMask=0027
+Restart=always
+RestartSec=3
+

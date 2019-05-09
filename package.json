@@ -1,0 +1,26 @@
+{
+  "name": "time-travel-estonia",
+  "version": "0.0.0",
+  "description": "",
+  "bin": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/coinbakery/time-travel-estonia.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@babel/core": "^7.4.3",
+    "@babel/plugin-transform-modules-commonjs": "^7.4.3",
+    "@babel/register": "^7.4.0",
+    "ajv": "^6.10.0",
+    "express": "^4.16.4",
+    "express-winston": "^3.1.0",
+    "pouchdb": "^7.0.0",
+    "pouchdb-seed-design": "^0.3.0",
+    "uniqid": "^5.0.3",
+    "winston": "^3.2.1"
+  },
+  "optionalDependencies": {
+    "sd-notify": "^2.6.0"
+  }
+}
