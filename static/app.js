@@ -81,3 +81,8 @@ function applyYearData(year) {
         map: 'estonia'
     });
 }
+
+$('#time-slider').on('input', e => {
+    const year = e.target.value
+    applyYearData(populationData[year])
+})
