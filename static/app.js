@@ -1,19 +1,21 @@
+const populationData = {
+    /**
+    2019: {
+        Tallinn: {
+           "14": 123123123
+        }
+    }
+     */
+};
+
 (async () => {
     const data = await fetch('RV0241.csv')
     const text = await data.text()
     const rows = text.split("\n")
-    const restructured = {
-        /**
-        2019: {
-            Tallinn: {
-               "14": 123123123
-            }
-        }
-         */
-    }
+
     let count = 0
 
-    for (var i = 1; i < rows.length -1; i++) {
+    for (var i = 1; i < rows.length - 1; i++) {
         const arr = rows[i].replace(/"/g, "").split(",")
         const location = arr[1]
         const sex = arr[3]
@@ -23,23 +25,23 @@
 
         if (!location.includes("COUNTY")) continue
         if (sex !== "Males and females") continue
-        
-        if (!restructured[year])
-            restructured[year] = {}
-        if (!restructured[year][location])
-            restructured[year][location] = {}
-        if (!restructured[year][location].ages)
-            restructured[year][location].ages = {}
+
+        if (!populationData[year])
+            populationData[year] = {}
+        if (!populationData[year][location])
+            populationData[year][location] = {}
+        if (!populationData[year][location].ages)
+            populationData[year][location].ages = {}
 
         if (age === "Total")
-            restructured[year][location].population = count
+            populationData[year][location].population = count
         else
-            restructured[year][location].ages[age] = count
+            populationData[year][location].ages[age] = count
     }
 
-    for (const year of Object.keys(restructured)) {
-        for (const location of Object.keys(restructured[year])) {
-            const ages = restructured[year][location].ages
+    for (const year of Object.keys(populationData)) {
+        for (const location of Object.keys(populationData[year])) {
+            const ages = populationData[year][location].ages
             let sumMult = 0
             let sumPopulation = 0
             for (const [age, pop] of Object.entries(ages)) {
@@ -47,11 +49,35 @@
                 sumPopulation += pop
             }
             const avg = sumMult / sumPopulation
-            delete restructured[year][location].ages
-            restructured[year][location].averageAge = avg
+            delete populationData[year][location].ages
+            populationData[year][location].averageAge = avg
         }
     }
 
-    console.log(restructured)
-    
+    console.log(populationData)
+    applyYearData(populationData[2015])
+
 })()
+
+function applyYearData(year) {
+    for (var i = 0; i < JSMaps.maps.estonia.paths.length; i++) {
+        const location = JSMaps.maps.estonia.paths[i].name
+        const avg = year[location].averageAge
+        const green = Math.abs(((avg - 38) * 255 / 8) - 255)
+        console.log(location, green)
+        JSMaps.maps.estonia.paths[i].color = `rgb(0,${green}, 0)`
+    }
+    /*
+    for (const location of Object.keys(year)) {
+        const avg = year[location].averageAge
+        const green = (avg - 38) * 255 / 8
+        JSMaps.maps.estonia.paths[0].color = "#ff0000"
+    }
+    */
+
+    $('#estonia-map').empty()
+    $('.jsmaps-select.mobile').remove()
+    $('#estonia-map').JSMaps({
+        map: 'estonia'
+    });
+}

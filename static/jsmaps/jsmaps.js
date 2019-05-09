@@ -172,7 +172,6 @@
     var paths = mapData.paths;
     var pins = mapData.pins;
 
-
     /////////////////////////////
     //Helpers
     /////////////////////////////

@@ -8,7 +8,7 @@ window.JSMaps.maps.estonia = {
 	"paths": [
 		{
 			"enable": true,
-			"name": "Harju",
+			"name": "HARJU COUNTY",
 			"abbreviation": "HA",
 			"textX": 0,
 			"textY": 0,
@@ -21,7 +21,7 @@ window.JSMaps.maps.estonia = {
 		},
 		{
 			"enable": true,
-			"name": "Tartu maakond",
+			"name": "TARTU COUNTY",
 			"abbreviation": "TA",
 			"textX": 0,
 			"textY": 0,
@@ -34,7 +34,7 @@ window.JSMaps.maps.estonia = {
 		},
 		{
 			"enable": true,
-			"name": "Hiiu",
+			"name": "HIIU COUNTY",
 			"abbreviation": "HI",
 			"textX": 0,
 			"textY": 0,
@@ -47,7 +47,7 @@ window.JSMaps.maps.estonia = {
 		},
 		{
 			"enable": true,
-			"name": "Lääne",
+			"name": "LÄÄNE COUNTY",
 			"abbreviation": "LN",
 			"textX": 0,
 			"textY": 0,
@@ -60,7 +60,7 @@ window.JSMaps.maps.estonia = {
 		},
 		{
 			"enable": true,
-			"name": "Pärnu",
+			"name": "PÄRNU COUNTY",
 			"abbreviation": "PR",
 			"textX": 0,
 			"textY": 0,
@@ -73,7 +73,7 @@ window.JSMaps.maps.estonia = {
 		},
 		{
 			"enable": true,
-			"name": "Saare",
+			"name": "SAARE COUNTY",
 			"abbreviation": "SA",
 			"textX": 0,
 			"textY": 0,
@@ -86,7 +86,7 @@ window.JSMaps.maps.estonia = {
 		},
 		{
 			"enable": true,
-			"name": "Ida-Viru",
+			"name": "IDA-VIRU COUNTY",
 			"abbreviation": "IV",
 			"textX": 0,
 			"textY": 0,
@@ -99,7 +99,7 @@ window.JSMaps.maps.estonia = {
 		},
 		{
 			"enable": true,
-			"name": "Järva",
+			"name": "JÄRVA COUNTY",
 			"abbreviation": "JR",
 			"textX": 0,
 			"textY": 0,
@@ -112,7 +112,7 @@ window.JSMaps.maps.estonia = {
 		},
 		{
 			"enable": true,
-			"name": "Jõgeva",
+			"name": "JÕGEVA COUNTY",
 			"abbreviation": "JN",
 			"textX": 0,
 			"textY": 0,
@@ -125,7 +125,7 @@ window.JSMaps.maps.estonia = {
 		},
 		{
 			"enable": true,
-			"name": "Lääne-Viru",
+			"name": "LÄÄNE-VIRU COUNTY",
 			"abbreviation": "LV",
 			"textX": 0,
 			"textY": 0,
@@ -138,7 +138,7 @@ window.JSMaps.maps.estonia = {
 		},
 		{
 			"enable": true,
-			"name": "Põlva",
+			"name": "PÕLVA COUNTY",
 			"abbreviation": "PL",
 			"textX": 0,
 			"textY": 0,
@@ -151,7 +151,7 @@ window.JSMaps.maps.estonia = {
 		},
 		{
 			"enable": true,
-			"name": "Rapla",
+			"name": "RAPLA COUNTY",
 			"abbreviation": "RA",
 			"textX": 0,
 			"textY": 0,
@@ -164,7 +164,7 @@ window.JSMaps.maps.estonia = {
 		},
 		{
 			"enable": true,
-			"name": "Valga",
+			"name": "VALGA COUNTY",
 			"abbreviation": "VG",
 			"textX": 0,
 			"textY": 0,
@@ -177,7 +177,7 @@ window.JSMaps.maps.estonia = {
 		},
 		{
 			"enable": true,
-			"name": "Viljandi",
+			"name": "VILJANDI COUNTY",
 			"abbreviation": "VD",
 			"textX": 0,
 			"textY": 0,
@@ -190,7 +190,7 @@ window.JSMaps.maps.estonia = {
 		},
 		{
 			"enable": true,
-			"name": "Võru",
+			"name": "VÕRU COUNTY",
 			"abbreviation": "VR",
 			"textX": 0,
 			"textY": 0,
