@@ -34,8 +34,38 @@
       margin: 20px auto;
     }
     
-    .slider {
+    .slider-container {
       text-align: center;
+    }
+    
+    .slider {
+      -webkit-appearance: none;
+      width: 30%;
+      height: 15px;
+      border-radius: 5px;  
+      background: #d3d3d3;
+      outline: none;
+      opacity: 0.7;
+      -webkit-transition: .2s;
+      transition: opacity .2s;
+    }
+
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%; 
+      background: #4CAF50;
+      cursor: pointer;
+    }
+
+    .slider::-moz-range-thumb {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      background: #4CAF50;
+      cursor: pointer;
     }
 
     @media only screen and (min-width: 768px) and (max-width: 1000px) {
@@ -118,9 +148,9 @@
 
   </script>
   
-  <div class="slider">
+  <div class="slider-container">
     <div><input type="range" min="2012" max="2017" value="2017" class="slider" id="time-slider"></div>
-    <div><label for="time-slider">Year: </label><em id="time-label"></em></div>
+    <h1><label for="time-slider">Year: </label><em id="time-label"></em></h1>
   </div>
 
   <!-- CB 1337><4XX0R code -->
