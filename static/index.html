@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <title>Estonian population</title>
   <meta name="description" content="Estonan polulation, average age, population future estimates">
+  <link rel="stylesheet" href="index.css">
 
   <!-- LIBRARIES -->
   <link href='https://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
@@ -27,27 +28,30 @@
 
 <body>
 
-  <div class="container">
-    <div class="jsmaps-wrapper" id="estonia-map">
-      <h1 style="text-align: center">LOADING</h1>
+  <div class="layout" id="layout-left">
+    <div class="container">
+      <div class="jsmaps-wrapper" id="estonia-map">
+        <h1 style="text-align: center">LOADING</h1>
+      </div>
+    </div>
+
+    <div class="legend">
+      <h2>Average age:</h2>
+      <div>
+        <h2 style="float: left">38&nbsp;</h2>
+        <div id="grad"></div>
+        <h2 style="float: left">&nbsp;46</h2>
+      </div>
     </div>
   </div>
-
-  <div class="legend">
-    <h2>Average age:</h2>
-    <div>
-      <h2 style="float: left">38&nbsp;</h2>
-      <div id="grad"></div>
-      <h2 style="float: left">&nbsp;46</h2>
-    </div>
+  <div class="layout" id="layout-right">
+    <div id="pyramid"> </div>
   </div>
-  <br /><br /><br /><br />
-
-  <div id="pyramid" style="width: 600px; height: 600px; margin: auto; position: absolute; left: 0; top: 0"> </div>
-
-  <div class="slider-container">
-    <div><input type="range" min="2012" max="2020" value="2017" class="slider" id="time-slider"></div>
-    <h1><label for="time-slider">Year: </label><em id="time-label"></em></h1>
+  <div class="layout" id="layout-bottom">
+    <div class="slider-container">
+      <div><input type="range" min="2012" max="2020" value="2017" class="slider" id="time-slider"></div>
+      <h1><label for="time-slider">Year: </label><em id="time-label"></em></h1>
+    </div>
   </div>
 
   <!-- CB 1337><4XX0R code -->

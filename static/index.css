@@ -1,0 +1,24 @@
+.layout {
+    display: inline-block;
+    padding: 2rem;
+}
+
+#layout-left {
+    width: 49.7%;
+}
+#layout-right {
+    width: 49.7%;
+    padding: 0;
+}
+#layout-bottom {
+    width: 100%;
+    background-color: #1d1d1d;
+}
+#layout-bottom h1 {
+    color: rgb(157, 150, 142);
+}
+
+#pyramid {
+    height: 500px;
+    width: 500px;
+}
