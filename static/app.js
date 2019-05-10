@@ -55,7 +55,7 @@ const populationData = {
     }
 
     console.log(populationData)
-    applyYearData(populationData[2015])
+    applyYearData(populationData[2017])
 
 })()
 
