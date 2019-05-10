@@ -138,6 +138,7 @@
   <script src="jsmaps/jsmaps.js" type="text/javascript"></script>
   <script src="maps/estonia.js" type="text/javascript"></script>
   <script src="papaparse.min.js"></script>
+  <script src="svg.min.js"></script>
   <!-- End Map scripts -->
 
 </head>
@@ -173,13 +174,16 @@
   </div>
   <br /><br /><br /><br />
 
+  <div id="pyramid" style="width: 600px; height: 600px; margin: auto; position: absolute; left: 0; top: 0"> </div>
+
   <div class="slider-container">
-    <div><input type="range" min="2012" max="2017" value="2017" class="slider" id="time-slider"></div>
+    <div><input type="range" min="2012" max="2020" value="2017" class="slider" id="time-slider"></div>
     <h1><label for="time-slider">Year: </label><em id="time-label"></em></h1>
   </div>
 
   <!-- CB 1337><4XX0R code -->
   <script src="app.js"></script>
+  <script src="pyramid.js"></script>
 
 </body>
 

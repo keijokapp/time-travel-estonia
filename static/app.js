@@ -10,6 +10,10 @@ const populationData = {
 
 (async () => {
 
+    let firstYear = Infinity;
+    let lastYear = 0;
+    const locations = new Set;
+
     await new Promise((resolve, reject) => {
         Papa.parse('RV0241.csv', {
             download: true,
@@ -28,6 +32,14 @@ const populationData = {
                     const count = Number(entry['Value']);
 
                     if (!location.includes("COUNTY")) return;
+
+                    if(year > lastYear) {
+                        lastYear = year;
+                    }
+                    if(year < firstYear) {
+                        firstYear = year;
+                    }
+                    locations.add(location);
 
                     if (!populationData[year])
                         populationData[year] = {}
@@ -62,8 +74,8 @@ const populationData = {
         })
     });
 
-    for (const year of Object.keys(populationData)) {
-        for (const location of Object.keys(populationData[year])) {
+    for (const year in populationData) {
+        for (const location in populationData[year]) {
             if (location === 'pyramid') continue;
             const ages = populationData[year][location].ages
             let sumMult = 0
@@ -78,8 +90,52 @@ const populationData = {
         }
     }
 
-    console.log(populationData)
-    applyYearData(populationData[2017])
+    const regressionCoefficients = {};
+
+    for(const location of locations) {
+        let avgSum = 0;
+        let avgSqrSum = 0;
+        let productSum = 0;
+        let yearSum = 0
+        let yearCount = 0;
+
+        for(let year =  firstYear; year <= lastYear; year++) {
+            const avg = populationData[year][location].averageAge;
+            if(!isNaN(avg)) {
+                avgSum += avg;
+                avgSqrSum += avg * avg;
+                productSum += year * avg;
+                yearSum += year;
+                yearCount++;
+            }
+        }
+
+        console.log('avgSum %d, avgSqrSum %d, productSum %d, yearSum %d, yearCount %d', avgSum, avgSqrSum, productSum, yearSum, yearCount)
+
+        let avgAvg = avgSum / yearCount;
+        let yearAvg = yearSum / yearCount;
+
+        const ssxx = avgSum - yearCount * avgAvg * avgAvg;
+        const ssxy = productSum - yearCount * yearAvg * avgAvg;
+
+        const b = ssxy / ssxx;
+        const a = yearAvg - b * avgAvg;
+
+        regressionCoefficients[location] = { a, b };
+    }
+
+    for(let year = lastYear + 1; year < lastYear + 4; year++) {
+        populationData[year] = {};
+        for (const location of locations) {
+            populationData[year][location] = {
+                averageAge: regressionCoefficients[location].a * year + regressionCoefficients[location].b
+            };
+        }
+    }
+
+    console.log(populationData, firstYear, lastYear);
+
+    applyYearData(populationData[lastYear])
 
 })()
 
@@ -91,6 +147,8 @@ function applyYearData(year) {
         console.log(location, green)
         JSMaps.maps.estonia.paths[i].color = `rgb(0,${green}, 0)`
     }
+
+    drawPyramid(year.pyramid);
     /*
     for (const location of Object.keys(year)) {
         const avg = year[location].averageAge
