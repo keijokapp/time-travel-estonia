@@ -219,3 +219,21 @@ $(function () {
     });
 
 });
+
+let playerId
+$('#play').on('click', e => {
+    if (playerId) {
+        clearInterval(playerId)
+        playerId = null
+    } else {
+        playerId = setInterval(() => {
+            const now = Number($('#time-slider').val())
+            const max = Number(document.querySelector('#time-slider').getAttribute('max'))
+            let next = now + 1
+            if (next >= max)
+                next = Number(document.querySelector('#time-slider').getAttribute('min'))
+            document.querySelector('#time-slider').value = next
+            $('#time-slider').trigger('input')
+        }, 500)
+    }
+})
