@@ -10,10 +10,10 @@ const drawPyramid = (function() {
 	const draw = SVG('pyramid');
 
 	function drawBox(age, {men, women}) {
-		const boxPosition = age * boxHeight;
+		const boxPosition = height - age * boxHeight;
 		draw.rect(men, boxHeight).fill('#517aff').move(middleLine - men, boxPosition);
 		draw.rect(women, boxHeight).fill('#ee42f4').move(middleLine, boxPosition);
-		draw.text('koer').move(middleLine + women, boxPosition);
+		draw.text(age).move(middleLine + women, boxPosition);
 	}
 
 	return function(data) {
