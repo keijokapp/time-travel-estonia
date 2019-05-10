@@ -90,9 +90,9 @@ function findLineByLeastSquares(values_x, values_y) {
 
                     if (sex !== "Males and females") {
                         if (sex === "Males")
-                            populationData[year].pyramid[age][0] = count
+                            populationData[year].pyramid[age][0] += count
                         if (sex === "Females")
-                            populationData[year].pyramid[age][1] = count
+                            populationData[year].pyramid[age][1] += count
                         return;
                     }
 
@@ -101,6 +101,30 @@ function findLineByLeastSquares(values_x, values_y) {
                     else if (!isNaN(age))
                         populationData[year][location].ages[age] = count
 
+                }
+            },
+            complete() {
+                resolve();
+            }
+        })
+    });
+
+    await new Promise((resolve, reject) => {
+        Papa.parse('RV089.csv', {
+            download: true,
+            header: true,
+            worker: true,
+            step({data, errors, meta}) {
+                for(const entry of data) {
+                   const year = Number(entry.year);
+                   const age = parseInt(entry.age);
+                   const men = Number(entry.men);
+                   const women = Number(entry.women);
+                   console.log(entry, year, age, men, women)
+                    if(!populationData[year] || !populationData[year].pyramid) {
+                        populationData[year] = { pyramid: {} };
+                    }
+                    populationData[year].pyramid[age] = [ men, women ];
                 }
             },
             complete() {
@@ -135,7 +159,6 @@ function findLineByLeastSquares(values_x, values_y) {
             yValues.push(populationData[year][location].averageAge);
         }
         const result = findLineByLeastSquares(xValues, yValues);
-        console.log('result', result)
         regressionCoefficients[location] = { a: result[0], b: result[1] };
     }
 
@@ -157,19 +180,19 @@ function findLineByLeastSquares(values_x, values_y) {
     }
 
     for(let year = lastYear + 1; year <= 2030; year++) {
-        populationData[year] = { pyramid: {} };
+//        populationData[year] = {/* pyramid: {} */};
         for (const location of locations) {
             const averageAge = regressionCoefficients[location].a * year + regressionCoefficients[location].b;
             populationData[year][location] = {
                 averageAge: averageAge >= 0 ? (averageAge <= 86 ? averageAge : 86) : 0
             };
-        }
+        }/*
         for(let age = 0; age < 85; age++) {
             populationData[year].pyramid[age] = [
                 regressionCoefficients[age][0].a * year + regressionCoefficients[age][0].b,
                 regressionCoefficients[age][1].a * year + regressionCoefficients[age][1].b
             ]
-        }
+        }*/
     }
 
     document.querySelector('#time-slider').setAttribute('max', 2030);
