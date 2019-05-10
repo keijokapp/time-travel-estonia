@@ -28,7 +28,6 @@ const populationData = {
                     const count = Number(entry['Value']);
 
                     if (!location.includes("COUNTY")) return;
-                    if (sex !== "Males and females") return;
 
                     if (!populationData[year])
                         populationData[year] = {}
@@ -36,11 +35,25 @@ const populationData = {
                         populationData[year][location] = {}
                     if (!populationData[year][location].ages)
                         populationData[year][location].ages = {}
+                    if (!populationData[year].pyramid)
+                        populationData[year].pyramid = {}
+                    if (!populationData[year].pyramid[age])
+                        populationData[year].pyramid[age] = [0, 0]
+
+
+                    if (sex !== "Males and females") {
+                        if (sex === "Males")
+                            populationData[year].pyramid[age][0] = count
+                        if (sex === "Females")
+                            populationData[year].pyramid[age][1] = count
+                        return;
+                    }
 
                     if (data['Age'] === "Total")
                         populationData[year][location].population = count
-                    else if(!isNaN(age))
+                    else if (!isNaN(age))
                         populationData[year][location].ages[age] = count
+
                 }
             },
             complete() {
@@ -51,6 +64,7 @@ const populationData = {
 
     for (const year of Object.keys(populationData)) {
         for (const location of Object.keys(populationData[year])) {
+            if (location === 'pyramid') continue;
             const ages = populationData[year][location].ages
             let sumMult = 0
             let sumPopulation = 0
