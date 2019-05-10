@@ -1,12 +1,4 @@
-const populationData = {
-    /**
-    2019: {
-        Tallinn: {
-           "14": 123123123
-        }
-    }
-     */
-};
+const populationData = { };
 
 
 function findLineByLeastSquares(values_x, values_y) {
@@ -136,32 +128,51 @@ function findLineByLeastSquares(values_x, values_y) {
     const regressionCoefficients = {};
 
     for(const location of locations) {
-
         const xValues = [];
         const yValues = [];
         for(let year =  firstYear; year <= lastYear; year++) {
             xValues.push(year);
             yValues.push(populationData[year][location].averageAge);
         }
-
         const result = findLineByLeastSquares(xValues, yValues);
-
         console.log('result', result)
-
         regressionCoefficients[location] = { a: result[0], b: result[1] };
     }
 
-    for(let year = lastYear + 1; year < lastYear + 4; year++) {
-        populationData[year] = {};
+    for(let age = 0; age < 85; age++) {
+        const xValues = [];
+        const y1Values = [];
+        const y2Values = [];
+        for(let year =  firstYear; year <= lastYear; year++) {
+            xValues.push(year);
+            y1Values.push(populationData[year].pyramid[age][0]);
+            y2Values.push(populationData[year].pyramid[age][1]);
+        }
+        const result1 = findLineByLeastSquares(xValues, y1Values);
+        const result2 = findLineByLeastSquares(xValues, y2Values);
+        regressionCoefficients[age] = [
+            { a: result1[0], b: result1[1] },
+            { a: result2[0], b: result2[1] }
+        ];
+    }
+
+    for(let year = lastYear + 1; year <= 2030; year++) {
+        populationData[year] = { pyramid: {} };
         for (const location of locations) {
             const averageAge = regressionCoefficients[location].a * year + regressionCoefficients[location].b;
             populationData[year][location] = {
                 averageAge: averageAge >= 0 ? (averageAge <= 86 ? averageAge : 86) : 0
             };
         }
+        for(let age = 0; age < 85; age++) {
+            populationData[year].pyramid[age] = [
+                regressionCoefficients[age][0].a * year + regressionCoefficients[age][0].b,
+                regressionCoefficients[age][1].a * year + regressionCoefficients[age][1].b
+            ]
+        }
     }
 
-    document.querySelector('#time-slider').setAttribute('max', lastYear + 4);
+    document.querySelector('#time-slider').setAttribute('max', 2030);
 
     applyYearData(populationData[lastYear])
 
