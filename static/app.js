@@ -9,35 +9,45 @@ const populationData = {
 };
 
 (async () => {
-    const data = await fetch('RV0241.csv')
-    const text = await data.text()
-    const rows = text.split("\n")
 
-    let count = 0
+    await new Promise((resolve, reject) => {
+        Papa.parse('RV0241.csv', {
+            download: true,
+            header: true,
+            worker: true,
+            step({data, errors, meta}) {
+                for(const entry of data) {
+                    if(!entry['DIM2']) {
+                        continue;
+                    }
 
-    for (var i = 1; i < rows.length - 1; i++) {
-        const arr = rows[i].replace(/"/g, "").split(",")
-        const location = arr[1]
-        const sex = arr[3]
-        const age = parseInt(arr[5]) || (arr[5] === "0" ? 0 : arr[5])
-        const year = parseInt(arr[7])
-        const count = parseInt(arr[8])
+                    const location = entry['Administrative unit or type of settlement'];
+                    const sex = entry['Sex'];
+                    const age = parseInt(entry['Age']);
+                    const year = Number(entry['TIME']);
+                    const count = Number(entry['Value']);
 
-        if (!location.includes("COUNTY")) continue
-        if (sex !== "Males and females") continue
+                    if (!location.includes("COUNTY")) return;
+                    if (sex !== "Males and females") return;
 
-        if (!populationData[year])
-            populationData[year] = {}
-        if (!populationData[year][location])
-            populationData[year][location] = {}
-        if (!populationData[year][location].ages)
-            populationData[year][location].ages = {}
+                    if (!populationData[year])
+                        populationData[year] = {}
+                    if (!populationData[year][location])
+                        populationData[year][location] = {}
+                    if (!populationData[year][location].ages)
+                        populationData[year][location].ages = {}
 
-        if (age === "Total")
-            populationData[year][location].population = count
-        else
-            populationData[year][location].ages[age] = count
-    }
+                    if (data['Age'] === "Total")
+                        populationData[year][location].population = count
+                    else if(!isNaN(age))
+                        populationData[year][location].ages[age] = count
+                }
+            },
+            complete() {
+                resolve();
+            }
+        })
+    });
 
     for (const year of Object.keys(populationData)) {
         for (const location of Object.keys(populationData[year])) {
