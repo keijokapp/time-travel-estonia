@@ -203,6 +203,7 @@ window.JSMaps.maps.estonia = {
 		}
 	],
 	"pins": [
+	/*
 		{
 			"name": "Tallinn",
 			"xPos": 320,
@@ -223,5 +224,6 @@ window.JSMaps.maps.estonia = {
 			"url": "http://jsmaps.io",
 			"text": "<h1>Sample pin</h1><br /><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>"
 		}
+  */
 	]
 }
