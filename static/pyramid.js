@@ -13,7 +13,8 @@ const drawPyramid = (function() {
 		const boxPosition = height - age * boxHeight;
 		draw.rect(men, boxHeight).fill('#517aff').move(middleLine - men, boxPosition);
 		draw.rect(women, boxHeight).fill('#ee42f4').move(middleLine, boxPosition);
-		draw.text(age).move(middleLine + women, boxPosition);
+		if (age % 10 === 0)
+			draw.text(age).move(middleLine, boxPosition);
 	}
 
 	return function(data) {
