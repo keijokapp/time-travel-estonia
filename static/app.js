@@ -86,3 +86,16 @@ $('#time-slider').on('input', e => {
     const year = e.target.value
     applyYearData(populationData[year])
 })
+
+
+$(function () {
+
+    // on page load, set the text of the label based the value of the range
+    $('#time-label').text($('#time-slider').val());
+
+    // setup an event handler to set the text when the range value is dragged (see event for input) or changed (see event for change)
+    $('#time-slider').on('input change', function () {
+        $('#time-label').text($(this).val());
+    });
+
+});

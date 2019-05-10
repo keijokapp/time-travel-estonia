@@ -33,6 +33,10 @@
       width: 960px;
       margin: 20px auto;
     }
+    
+    .slider {
+      text-align: center;
+    }
 
     @media only screen and (min-width: 768px) and (max-width: 1000px) {
       .container {
@@ -113,9 +117,11 @@
     });
 
   </script>
-
-  <input type="range" min="2012" max="2017" value="2017" class="slider" id="time-slider">
-
+  
+  <div class="slider">
+    <div><input type="range" min="2012" max="2017" value="2017" class="slider" id="time-slider"></div>
+    <div><label for="time-slider">Year: </label><em id="time-label"></em></div>
+  </div>
 
   <!-- CB 1337><4XX0R code -->
   <script src="app.js"></script>
