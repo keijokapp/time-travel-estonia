@@ -5,7 +5,7 @@ const drawPyramid = (function() {
 	const height = element.clientHeight;
 	const middleLine = width / 2;
 	const maxAge = 85;
-	const boxHeight = maxAge / height;
+	const boxHeight = height / maxAge;
 
 	const draw = SVG('pyramid');
 
