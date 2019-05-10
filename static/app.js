@@ -8,6 +8,49 @@ const populationData = {
      */
 };
 
+
+function findLineByLeastSquares(values_x, values_y) {
+    var sum_x = 0;
+    var sum_y = 0;
+    var sum_xy = 0;
+    var sum_xx = 0;
+    var count = 0;
+
+    /*
+     * We'll use those variables for faster read/write access.
+     */
+    var x = 0;
+    var y = 0;
+    var values_length = values_x.length;
+
+    if (values_length != values_y.length) {
+        throw new Error('The parameters values_x and values_y need to have same size!');
+    }
+
+    /*
+     * Calculate the sum for each of the parts necessary.
+     */
+    for (let v = 0; v < values_length; v++) {
+        x = values_x[v];
+        y = values_y[v];
+        sum_x += x;
+        sum_y += y;
+        sum_xx += x*x;
+        sum_xy += x*y;
+        count++;
+    }
+
+    /*
+     * Calculate m and b for the formular:
+     * y = x * m + b
+     */
+    var m = (count*sum_xy - sum_x*sum_y) / (count*sum_xx - sum_x*sum_x);
+    var b = (sum_y/count) - (m*sum_x)/count;
+
+    return [ m, b ];
+}
+
+
 (async () => {
 
     let firstYear = Infinity;
@@ -93,47 +136,32 @@ const populationData = {
     const regressionCoefficients = {};
 
     for(const location of locations) {
-        let avgSum = 0;
-        let avgSqrSum = 0;
-        let productSum = 0;
-        let yearSum = 0
-        let yearCount = 0;
 
+        const xValues = [];
+        const yValues = [];
         for(let year =  firstYear; year <= lastYear; year++) {
-            const avg = populationData[year][location].averageAge;
-            if(!isNaN(avg)) {
-                avgSum += avg;
-                avgSqrSum += avg * avg;
-                productSum += year * avg;
-                yearSum += year;
-                yearCount++;
-            }
+            xValues.push(year);
+            yValues.push(populationData[year][location].averageAge);
         }
 
-        console.log('avgSum %d, avgSqrSum %d, productSum %d, yearSum %d, yearCount %d', avgSum, avgSqrSum, productSum, yearSum, yearCount)
+        const result = findLineByLeastSquares(xValues, yValues);
 
-        let avgAvg = avgSum / yearCount;
-        let yearAvg = yearSum / yearCount;
+        console.log('result', result)
 
-        const ssxx = avgSum - yearCount * avgAvg * avgAvg;
-        const ssxy = productSum - yearCount * yearAvg * avgAvg;
-
-        const b = ssxy / ssxx;
-        const a = yearAvg - b * avgAvg;
-
-        regressionCoefficients[location] = { a, b };
+        regressionCoefficients[location] = { a: result[0], b: result[1] };
     }
 
     for(let year = lastYear + 1; year < lastYear + 4; year++) {
         populationData[year] = {};
         for (const location of locations) {
+            const averageAge = regressionCoefficients[location].a * year + regressionCoefficients[location].b;
             populationData[year][location] = {
-                averageAge: regressionCoefficients[location].a * year + regressionCoefficients[location].b
+                averageAge: averageAge >= 0 ? (averageAge <= 86 ? averageAge : 86) : 0
             };
         }
     }
 
-    console.log(populationData, firstYear, lastYear);
+    document.querySelector('#time-slider').setAttribute('max', lastYear + 4);
 
     applyYearData(populationData[lastYear])
 
@@ -143,8 +171,7 @@ function applyYearData(year) {
     for (var i = 0; i < JSMaps.maps.estonia.paths.length; i++) {
         const location = JSMaps.maps.estonia.paths[i].name
         const avg = year[location].averageAge
-        const green = Math.abs(((avg - 38) * 255 / 8) - 255)
-        console.log(location, green)
+        const green = 255 - (Math.max(Math.min(avg, 44), 38) - 38) * 255 / 8;
         JSMaps.maps.estonia.paths[i].color = `rgb(0,${green}, 0)`
     }
 

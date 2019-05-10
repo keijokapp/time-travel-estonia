@@ -1,3 +1,7 @@
+body {
+    background-color: #1d1d1d;
+}
+
 .layout {
     display: inline-block;
     padding: 2rem;
@@ -12,7 +16,9 @@
 }
 #layout-bottom {
     width: 100%;
-    background-color: #1d1d1d;
+}
+#layout-top {
+    background-color: white;
 }
 #layout-bottom h1 {
     color: rgb(157, 150, 142);
