@@ -68,6 +68,21 @@
       cursor: pointer;
     }
 
+    #grad {
+      height: 22px;
+      width: 300px;
+      background-color: black;
+      background-image: linear-gradient(to right, green , black);
+      float: left;
+    }  
+    
+    .legend {
+      position: relative;
+      width: 350px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
     @media only screen and (min-width: 768px) and (max-width: 1000px) {
       .container {
         width: 768px;
@@ -147,7 +162,17 @@
     });
 
   </script>
-  
+
+  <div class="legend">
+    <h2>Agerage age:</h2>
+    <div>
+      <h2 style="float: left">38&nbsp;</h2>
+      <div id="grad"></div>
+      <h2 style="float: left">&nbsp;46</h2>
+    </div>
+  </div>
+  <br /><br />
+
   <div class="slider-container">
     <div><input type="range" min="2012" max="2017" value="2017" class="slider" id="time-slider"></div>
     <h1><label for="time-slider">Year: </label><em id="time-label"></em></h1>
